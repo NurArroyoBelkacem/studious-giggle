@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taco Mex Halal - Marrakech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #fff9e6 100%);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b35 0%, #d4481f 50%, #ffd700 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        /* Información de contacto */
+        .contact-info {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .contact-info a {
+            color: #d4481f;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            color: #ff6b35;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #d4481f;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        /* Grid de productos */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #ffe4cc 0%, #fff0db 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            color: #d4481f;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 1.5em;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #ff6b35 0%, #d4481f 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            width: 100%;
+        }
+
+        .btn-add:hover {
+            opacity: 0.9;
+        }
+
+        /* Carrito */
+        .cart-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .cart-section h3 {
+            color: #d4481f;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .cart-item-name {
+            flex: 1;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart-item-price {
+            color: #ffd700;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+
+        .btn-remove {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .btn-remove:hover {
+            background: #d4481f;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffe4cc 0%, #fff0db 100%);
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #d4481f;
+            margin-top: 20px;
+        }
+
+        .btn-checkout {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #d4481f;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: opacity 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-checkout:hover {
+            opacity: 0.9;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #d4481f;
+        }
+
+        .modal h2 {
+            color: #d4481f;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff6b35 0%, #d4481f 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info a {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>🌮 Taco Mex Halal</h1>
+        <p>Comida deliciosa sin comisiones - Marrakech</p>
+    </header>
+
+    <!-- Información de contacto -->
+    <div class="contact-info">
+        <a href="https://wa.me/212660778954">📱 WhatsApp: +212 660 77 89 54</a>
+        <a href="mailto:mexicanhalal7@gmail.com">📧 mexicanhalal7@gmail.com</a>
+        <a href="#">📍 Marrakech, Marruecos</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <h2>🍽️ Nuestro Menú</h2>
+        
+        <!-- Grid de productos -->
+        <div class="menu-grid" id="menuGrid">
+            <!-- Los productos se generarán con JavaScript -->
+        </div>
+
+        <!-- Sección de carrito -->
+        <div class="cart-section">
+            <h3>🛒 Tu Carrito</h3>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">Tu carrito está vacío</div>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0,00 €</span>
+            </div>
+            <button class="btn-checkout" onclick="proceedToCheckout()">Hacer Pedido</button>
+        </div>
+    </div>
+
+    <!-- Modal de checkout -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Confirmar Pedido</h2>
+            <form onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="name">Nombre completo:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Dirección de entrega:</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notas adicionales:</label>
+                    <textarea id="notes" placeholder="Ej: Sin cebolla, extra picante..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Taco Mex Halal - Marrakech</p>
+        <p>Preparamos tus tacos con amor 💚</p>
+    </footer>
+
+    <script>
+        // Datos de productos
+        const products = [
+            {
+                id: 1,
+                name: 'Durum al Pastor',
+                description: 'Durum al Pastor Halal - Preparación tradicional',
+                price: 4.50,
+                emoji: '🍖'
+            },
+            {
+                id: 2,
+                name: 'Bocadillo de Pollo Picante',
+                description: 'Pollo con sabor intenso y picante',
+                price: 8.00,
+                emoji: '🔥'
+            },
+            {
+                id: 3,
+                name: 'Taco de Cordero',
+                description: 'Taco de Cordero Halal - Carne de calidad',
+                price: 6.50,
+                emoji: '🐑'
+            },
+            {
+                id: 4,
+                name: 'Galápago Barbacoa',
+                description: 'Galápago Barbacoa Halal - Delicioso',
+                price: 3.99,
+                emoji: '🔥'
+            },
+            {
+                id: 5,
+                name: 'Bebida (33cl)',
+                description: 'Refresco en lata de 33cl',
+                price: 2.50,
+                emoji: '🥤'
+            }
+        ];
+
+        // Carrito
+        let cart = [];
+
+        // Mostrar menú
+        function displayMenu() {
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">${product.emoji}</div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="price">${product.price.toFixed(2)} €</div>
+                        <button class="btn-add" onclick="addToCart(${product.id})">Añadir al carrito</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Añadir al carrito
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            updateCart();
+        }
+
+        // Actualizar carrito
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+                cartTotal.textContent = '0,00 €';
+                return;
+            }
+
+            let total = 0;
+            cartItems.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <span class="cart-item-name">${item.emoji} ${item.name} x${item.quantity}</span>
+                        <span class="cart-item-price">${itemTotal.toFixed(2)} €</span>
+                        <button class="btn-remove" onclick="removeFromCart(${item.id})">Eliminar</button>
+                    </div>
+                `;
+            }).join('');
+
+            cartTotal.textContent = total.toFixed(2) + ' €';
+        }
+
+        // Eliminar del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // Proceder a checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. ¡Añade productos!');
+                return;
+            }
+            document.getElementById('checkoutModal').style.display = 'block';
+        }
+
+        // Cerrar modal
+        function closeCheckout() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        // Enviar pedido
+        function submitOrder(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const notes = document.getElementById('notes').value;
+
+            // Calcular total
+            let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Crear mensaje para WhatsApp
+            let message = `¡Hola! Tengo un nuevo pedido:\n\n`;
+            message += `👤 Cliente: ${name}\n`;
+            message += `📱 Teléfono: ${phone}\n`;
+            message += `📍 Dirección: ${address}\n\n`;
+            message += `🛒 *Pedido:*\n`;
+            cart.forEach(item => {
+                message += `• ${item.name} x${item.quantity} = ${(item.price * item.quantity).toFixed(2)} €\n`;
+            });
+            message += `\n💰 *Total: ${total.toFixed(2)} €*\n`;
+            if (notes) {
+                message += `📝 Notas: ${notes}\n`;
+            }
+
+            // Enviar a WhatsApp
+            const whatsappNumber = '212660778954';
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+
+            // Limpiar carrito
+            cart = [];
+            updateCart();
+            closeCheckout();
+            alert('¡Pedido enviado a WhatsApp! Te contactaremos pronto.');
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('checkoutModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Inicializar
+        displayMenu();
+    </script>
+</body>
+</html>
